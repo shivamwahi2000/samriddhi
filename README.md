@@ -11,6 +11,12 @@ The platform demonstrates how rural participation can:
 
 ---
 
+## 🎥 Demo  
+
+[![Watch the Demo](https://img.youtube.com/vi/iZXWBR711Yg/0.jpg)](https://youtu.be/iZXWBR711Yg)  
+
+---
+
 ## 🚩 Problem  
 - Indian bond markets suffer from **low liquidity**, making it difficult for institutions to exit positions due to weak retail participation.  
 - At the same time, **800M+ rural Indians** remain excluded from formal investments, with over ₹15 lakh crore in savings earning less than 4% annually.  
@@ -24,8 +30,6 @@ Samriddhi bridges this gap by:
 - Offering a **bilingual interface** (Hindi/English) for accessibility  
 - Supporting **democratic SHG voting** for group decisions  
 - Delivering **portfolio tracking, KYC management, and financial literacy modules**  
-
-This dual approach expands participation, deepens liquidity, and improves price discovery in bond markets.  
 
 ---
 
@@ -53,11 +57,6 @@ This dual approach expands participation, deepens liquidity, and improves price 
 **Current Stage**  
 - Runs locally as an **MVP prototype**  
 - Demonstrates account creation, bond browsing, SHG voting, and portfolio tracking  
-
----
-
-## 🎥 Demo  
-👉 [Watch the Demo Video](YOUR_VIDEO_LINK_HERE)  
 
 ---
 
