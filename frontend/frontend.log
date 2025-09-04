@@ -1,0 +1,48 @@
+::1 - - [31/Aug/2025 16:39:27] "GET / HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:39:45] "GET / HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:39:45] "GET /rural-app.js HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:39:45] "GET /manifest.json HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:39:45] code 404, message File not found
+::1 - - [31/Aug/2025 16:39:45] "GET /favicon.ico HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:39:45] code 404, message File not found
+::1 - - [31/Aug/2025 16:39:45] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:39:45] "GET /sw.js HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:39:45] "GET /index.html HTTP/1.1" 200 -
+::1 - - [31/Aug/2025 16:49:42] code 404, message File not found
+::1 - - [31/Aug/2025 16:49:42] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:49:44] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 16:51:59] code 404, message File not found
+::1 - - [31/Aug/2025 16:51:59] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:52:00] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 16:53:01] code 404, message File not found
+::1 - - [31/Aug/2025 16:53:01] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:53:51] code 404, message File not found
+::1 - - [31/Aug/2025 16:53:51] code 404, message File not found
+::1 - - [31/Aug/2025 16:53:51] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:53:51] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:53:53] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 16:56:23] code 404, message File not found
+::1 - - [31/Aug/2025 16:56:23] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:56:23] code 404, message File not found
+::1 - - [31/Aug/2025 16:56:23] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:56:24] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 16:58:48] code 404, message File not found
+::1 - - [31/Aug/2025 16:58:48] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:58:48] code 404, message File not found
+::1 - - [31/Aug/2025 16:58:48] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 16:58:50] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 17:02:57] code 404, message File not found
+::1 - - [31/Aug/2025 17:02:57] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 17:02:57] code 404, message File not found
+::1 - - [31/Aug/2025 17:02:57] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 17:02:58] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 19:41:15] code 404, message File not found
+::1 - - [31/Aug/2025 19:41:15] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 19:41:15] code 404, message File not found
+::1 - - [31/Aug/2025 19:41:15] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 19:41:16] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 19:42:22] code 404, message File not found
+::1 - - [31/Aug/2025 19:42:22] "GET /icon-192.png HTTP/1.1" 404 -
+::1 - - [31/Aug/2025 19:42:23] "GET /sw.js HTTP/1.1" 304 -
+::1 - - [31/Aug/2025 19:43:18] code 404, message File not found
+::1 - - [31/Aug/2025 19:43:18] "GET /.well-known/appspecific/com.chrome.devtools.json HTTP/1.1" 404 -

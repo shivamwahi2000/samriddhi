@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>समृद्धि - ग्रामीण निवेश मंच</title>
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#059669">
+    
+    <!-- Optimized for rural devices -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+        
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.3);
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 32px;
+            font-weight: bold;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #047857;
+            margin-bottom: 5px;
+        }
+        
+        .subtitle {
+            font-size: 16px;
+            color: #6b7280;
+        }
+        
+        /* Trust Banner */
+        .trust-banner {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+            border: 2px solid #f59e0b;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        
+        .trust-text {
+            font-size: 14px;
+            color: #92400e;
+            font-weight: 600;
+        }
+        
+        /* Key Numbers */
+        .metrics {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .metric-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e5e7eb;
+        }
+        
+        .metric-number {
+            font-size: 36px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+        
+        .metric-label {
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 600;
+        }
+        
+        .green { color: #059669; }
+        .blue { color: #0284c7; }
+        .purple { color: #7c3aed; }
+        .orange { color: #ea580c; }
+        
+        /* Main Card */
+        .main-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .label {
+            display: block;
+            font-size: 16px;
+            font-weight: 700;
+            color: #374151;
+            margin-bottom: 8px;
+        }
+        
+        .input {
+            width: 100%;
+            padding: 15px;
+            font-size: 18px;
+            border: 3px solid #d1d5db;
+            border-radius: 12px;
+            background: #f9fafb;
+            transition: all 0.3s ease;
+        }
+        
+        .input:focus {
+            outline: none;
+            border-color: #059669;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+        
+        .phone-input {
+            display: flex;
+            align-items: center;
+            border: 3px solid #d1d5db;
+            border-radius: 12px;
+            background: #f9fafb;
+            overflow: hidden;
+        }
+        
+        .phone-prefix {
+            padding: 15px;
+            background: #e5e7eb;
+            font-weight: 700;
+            color: #374151;
+            font-size: 18px;
+        }
+        
+        .phone-input input {
+            border: none;
+            background: none;
+            flex: 1;
+        }
+        
+        /* Buttons */
+        .btn {
+            width: 100%;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+            color: white;
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(5, 150, 105, 0.4);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #374151;
+            border: 2px solid #d1d5db;
+        }
+        
+        .btn:disabled {
+            background: #d1d5db;
+            color: #9ca3af;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* User Type Cards */
+        .user-type-card {
+            background: white;
+            border: 3px solid #e5e7eb;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .user-type-card:hover {
+            border-color: #059669;
+            background: #f0fdf4;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .user-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        
+        .individual-icon {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        }
+        
+        .shg-icon {
+            background: linear-gradient(135deg, #059669 0%, #047857 100%);
+        }
+        
+        .user-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 5px;
+        }
+        
+        .user-desc {
+            font-size: 14px;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+        
+        /* OTP Input */
+        .otp-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .otp-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            border: 3px solid #d1d5db;
+            border-radius: 10px;
+            background: #f9fafb;
+        }
+        
+        .otp-input:focus {
+            outline: none;
+            border-color: #059669;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.1);
+        }
+        
+        .otp-input.filled {
+            border-color: #059669;
+            background: #f0fdf4;
+            color: #047857;
+        }
+        
+        /* Messages */
+        .error {
+            background: #fef2f2;
+            border: 2px solid #fca5a5;
+            border-radius: 10px;
+            padding: 15px;
+            color: #dc2626;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .success {
+            background: #f0fdf4;
+            border: 2px solid #86efac;
+            border-radius: 10px;
+            padding: 15px;
+            color: #059669;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        /* Loading */
+        .loading {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Hide/Show */
+        .hidden { display: none !important; }
+        
+        /* Language Toggle */
+        .lang-toggle {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #d1d5db;
+            border-radius: 25px;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        /* Mobile Optimizations */
+        @media (max-width: 480px) {
+            .container { padding: 15px; }
+            .metrics { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .metric-number { font-size: 28px; }
+            .otp-input { width: 45px; height: 55px; font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Toggle -->
+    <button class="lang-toggle" onclick="toggleLanguage()">
+        <span id="langText">हिंदी / English</span>
+    </button>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="logo-text">समृ</span>
+            </div>
+            <h1 class="title" data-hi="समृद्धि" data-en="Samriddhi">समृद्धि</h1>
+            <p class="subtitle" data-hi="ग्रामीण निवेश मंच" data-en="Rural Investment Platform">ग्रामीण निवेश मंच</p>
+        </div>
+
+        <!-- Trust Banner -->
+        <div class="trust-banner">
+            <p class="trust-text" data-hi="🛡️ सरकारी मान्यता प्राप्त • SEBI पंजीकृत • 100% सुरक्षित" data-en="🛡️ Government Approved • SEBI Registered • 100% Secure">
+                🛡️ सरकारी मान्यता प्राप्त • SEBI पंजीकृत • 100% सुरक्षित
+            </p>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="metrics">
+            <div class="metric-card">
+                <div class="metric-number green">₹100</div>
+                <div class="metric-label" data-hi="न्यूनतम निवेश" data-en="Minimum Investment">न्यूनतम निवेश</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number blue">9.25%</div>
+                <div class="metric-label" data-hi="वार्षिक रिटर्न" data-en="Annual Returns">वार्षिक रिटर्न</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number purple">10,000+</div>
+                <div class="metric-label" data-hi="ग्रामीण निवेशक" data-en="Rural Investors">ग्रामीण निवेशक</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-number orange">AAA</div>
+                <div class="metric-label" data-hi="बॉन्ड रेटिंग" data-en="Bond Rating">बॉन्ड रेटिंग</div>
+            </div>
+        </div>
+
+        <!-- User Type Selection -->
+        <div id="userTypeStep" class="main-card">
+            <h2 style="font-size: 22px; font-weight: 700; margin-bottom: 20px; text-align: center;" 
+                data-hi="आप कौन हैं?" data-en="Who are you?">आप कौन हैं?</h2>
+            
+            <div class="user-type-card" onclick="selectUserType('individual')">
+                <div class="user-icon individual-icon">👤</div>
+                <div class="user-title" data-hi="व्यक्तिगत निवेशक" data-en="Individual Investor">व्यक्तिगत निवेशक</div>
+                <div class="user-desc" data-hi="अपने लिए निवेश करें" data-en="Invest for yourself">अपने लिए निवेश करें</div>
+            </div>
+            
+            <div class="user-type-card" onclick="selectUserType('shg')">
+                <div class="user-icon shg-icon">👥</div>
+                <div class="user-title" data-hi="स्वयं सहायता समूह (SHG)" data-en="Self Help Group (SHG)">स्वयं सहायता समूह (SHG)</div>
+                <div class="user-desc" data-hi="समूह के लिए निवेश करें" data-en="Invest for your group">समूह के लिए निवेश करें</div>
+            </div>
+        </div>
+
+        <!-- Phone Input -->
+        <div id="phoneStep" class="main-card hidden">
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 20px; text-align: center;" 
+                data-hi="मोबाइल नंबर डालें" data-en="Enter Mobile Number">मोबाइल नंबर डालें</h2>
+            
+            <div id="phoneError" class="error hidden"></div>
+            
+            <form onsubmit="sendOTP(event)">
+                <div class="form-group">
+                    <label class="label" data-hi="मोबाइल नंबर" data-en="Mobile Number">मोबाइल नंबर</label>
+                    <div class="phone-input">
+                        <div class="phone-prefix">+91</div>
+                        <input id="phoneInput" type="tel" placeholder="1234567890" maxlength="10" class="input" required>
+                    </div>
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;" 
+                       data-hi="📱 WhatsApp पर OTP भेजा जाएगा" data-en="📱 OTP will be sent via WhatsApp">
+                        📱 WhatsApp पर OTP भेजा जाएगा
+                    </p>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="sendOtpBtn" 
+                        data-hi="WhatsApp OTP भेजें" data-en="Send WhatsApp OTP">
+                    WhatsApp OTP भेजें
+                </button>
+            </form>
+            
+            <button onclick="goBack()" class="btn btn-secondary" style="margin-top: 15px;" 
+                    data-hi="← वापस जाएं" data-en="← Go Back">← वापस जाएं</button>
+        </div>
+
+        <!-- OTP Verification -->
+        <div id="otpStep" class="main-card hidden">
+            <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 15px; text-align: center;" 
+                data-hi="OTP डालें" data-en="Enter OTP">OTP डालें</h2>
+            
+            <p style="text-align: center; color: #6b7280; margin-bottom: 25px;" 
+               data-hi="WhatsApp पर भेजा गया 6 अंकों का कोड डालें" data-en="Enter 6-digit code sent on WhatsApp">
+                WhatsApp पर भेजा गया 6 अंकों का कोड डालें
+            </p>
+            <p style="text-align: center; font-weight: 700; margin-bottom: 20px;">
+                📱 +91<span id="displayPhone"></span>
+            </p>
+            
+            <div id="otpError" class="error hidden"></div>
+            
+            <div class="otp-container" id="otpInputs">
+                <!-- OTP inputs generated by JS -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0;">
+                <button onclick="resendOTP()" id="resendBtn" 
+                        style="background: none; border: none; color: #059669; font-weight: 600; font-size: 14px; cursor: pointer;"
+                        data-hi="दोबारा भेजें" data-en="Resend">
+                    दोबारा भेजें
+                </button>
+                <div id="countdown" class="hidden" style="color: #6b7280; font-size: 14px; margin-top: 5px;"></div>
+            </div>
+            
+            <button onclick="verifyOTP()" id="verifyBtn" class="btn btn-primary" 
+                    data-hi="सत्यापित करें" data-en="Verify">सत्यापित करें</button>
+        </div>
+
+        <!-- KYC Form -->
+        <div id="kycStep" class="main-card hidden" style="max-height: 70vh; overflow-y: auto;">
+            <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 15px; text-align: center;" 
+                data-hi="विवरण भरें" data-en="Fill Details">विवरण भरें</h2>
+            
+            <div class="trust-banner" style="margin-bottom: 20px;">
+                <p style="font-size: 12px; color: #92400e;" 
+                   data-hi="⚠️ SEBI नियमों के अनुसार आवश्यक जानकारी" data-en="⚠️ Required information as per SEBI regulations">
+                    ⚠️ SEBI नियमों के अनुसार आवश्यक जानकारी
+                </p>
+            </div>
+            
+            <form onsubmit="submitKYC(event)" id="kycForm">
+                <!-- Individual KYC Fields -->
+                <div id="individualFields">
+                    <div class="form-group">
+                        <label class="label" data-hi="पूरा नाम *" data-en="Full Name *">पूरा नाम *</label>
+                        <input type="text" name="fullName" class="input" placeholder="जैसे PAN कार्ड में है">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label class="label" data-hi="जन्म तारीख *" data-en="Date of Birth *">जन्म तारीख *</label>
+                            <input type="date" name="dateOfBirth" class="input">
+                        </div>
+                        <div class="form-group">
+                            <label class="label" data-hi="लिंग *" data-en="Gender *">लिंग *</label>
+                            <select name="gender" class="input">
+                                <option value="">चुनें</option>
+                                <option value="male">पुरुष</option>
+                                <option value="female">महिला</option>
+                                <option value="other">अन्य</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="ईमेल पता *" data-en="Email Address *">ईमेल पता *</label>
+                        <input type="email" name="email" class="input" placeholder="आपका@email.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="पूरा पता *" data-en="Complete Address *">पूरा पता *</label>
+                        <textarea name="address" class="input" rows="2" placeholder="घर, गली, गांव, जिला, राज्य"></textarea>
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label class="label" data-hi="PIN कोड *" data-en="PIN Code *">PIN कोड *</label>
+                            <input type="text" name="pinCode" class="input" placeholder="123456" maxlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label class="label" data-hi="PAN नंबर *" data-en="PAN Number *">PAN नंबर *</label>
+                            <input type="text" name="panNumber" class="input" placeholder="ABCDE1234F" maxlength="10">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="आधार नंबर *" data-en="Aadhaar Number *">आधार नंबर *</label>
+                        <input type="text" name="aadhaarNumber" class="input" placeholder="1234 5678 9012" maxlength="12">
+                    </div>
+                </div>
+
+                <!-- SHG KYC Fields -->
+                <div id="shgFields" class="hidden">
+                    <div class="form-group">
+                        <label class="label" data-hi="SHG का नाम *" data-en="SHG Name *">SHG का नाम *</label>
+                        <input type="text" name="shgName" class="input" placeholder="स्वयं सहायता समूह का नाम">
+                    </div>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label class="label" data-hi="पंजीकरण नंबर *" data-en="Registration No. *">पंजीकरण नंबर *</label>
+                            <input type="text" name="registrationNumber" class="input" placeholder="SHG/2024/001">
+                        </div>
+                        <div class="form-group">
+                            <label class="label" data-hi="सदस्य संख्या *" data-en="Member Count *">सदस्य संख्या *</label>
+                            <input type="number" name="memberCount" class="input" placeholder="15" min="10" max="20">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="अधिकृत व्यक्ति *" data-en="Authorized Person *">अधिकृत व्यक्ति *</label>
+                        <input type="text" name="authorizedPerson" class="input" placeholder="निवेश के लिए अधिकृत व्यक्ति का नाम">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="SHG का ईमेल *" data-en="SHG Email *">SHG का ईमेल *</label>
+                        <input type="email" name="shgEmail" class="input" placeholder="shg@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="label" data-hi="SHG का PAN *" data-en="SHG PAN *">SHG का PAN *</label>
+                        <input type="text" name="shgPan" class="input" placeholder="ABCDE1234F" maxlength="10">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="kycBtn" 
+                        data-hi="खाता बनाएं" data-en="Create Account">खाता बनाएं</button>
+            </form>
+        </div>
+
+        <!-- Success Message -->
+        <div id="successStep" class="main-card hidden">
+            <div style="text-align: center;">
+                <div style="font-size: 60px; margin-bottom: 20px;">🎉</div>
+                <h2 style="font-size: 24px; font-weight: 700; color: #059669; margin-bottom: 15px;" 
+                    data-hi="स्वागत है!" data-en="Welcome!">स्वागत है!</h2>
+                <p style="color: #6b7280; margin-bottom: 25px;" 
+                   data-hi="आपका खाता सफलतापूर्वक बन गया है" data-en="Your account has been created successfully">
+                    आपका खाता सफलतापूर्वक बन गया है
+                </p>
+                <button onclick="goToDashboard()" class="btn btn-primary" 
+                        data-hi="निवेश शुरू करें" data-en="Start Investing">निवेश शुरू करें</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="rural-app.js?v=2"></script>
+</body>
+</html>

@@ -1,0 +1,194 @@
+// Demo Prisma schema for SQLite (easier setup)
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                   Int       @id @default(autoincrement())
+  name                 String
+  nameHindi            String?
+  phone                String    @unique
+  email                String?
+  aadhaarHash          String?
+  userType             String    @default("individual")
+  kycStatus            String    @default("pending")
+  languagePreference   String    @default("en")
+  walletAddress        String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  // Relations
+  holdings             Holding[]
+  transactions         Transaction[]
+  leaderOfShgs         Shg[]
+  shgMemberships       ShgMember[]
+  shgProposals         ShgProposal[]
+  shgVotes             ShgVote[]
+  educationProgress    EducationProgress[]
+  kycDocuments         KycDocument[]
+}
+
+model Shg {
+  id                   Int      @id @default(autoincrement())
+  name                 String
+  nameHindi            String?
+  leaderUserId         Int
+  totalMembers         Int      @default(0)
+  votingThreshold      Float    @default(0.60)
+  walletAddress        String?
+  location             String?
+  registrationNumber   String?
+  createdAt            DateTime @default(now())
+
+  // Relations
+  leader               User        @relation(fields: [leaderUserId], references: [id])
+  members              ShgMember[]
+  proposals            ShgProposal[]
+}
+
+model ShgMember {
+  id        Int      @id @default(autoincrement())
+  shgId     Int
+  userId    Int
+  role      String   @default("member")
+  joinedAt  DateTime @default(now())
+
+  // Relations
+  shg       Shg  @relation(fields: [shgId], references: [id])
+  user      User @relation(fields: [userId], references: [id])
+
+  @@unique([shgId, userId])
+}
+
+model Bond {
+  id                   Int      @id @default(autoincrement())
+  issuer               String
+  issuerHindi          String?
+  bondName             String
+  isin                 String   @unique
+  faceValue            Float
+  currentPrice         Float
+  yieldRate            Float
+  creditRating         String
+  maturityDate         DateTime
+  issueDate            DateTime
+  totalAmount          Float
+  availableAmount      Float
+  minInvestment        Float    @default(100.00)
+  contractAddress      String?
+  tokenId              Int?
+  isActive             Boolean  @default(true)
+  createdAt            DateTime @default(now())
+
+  // Relations
+  holdings             Holding[]
+  transactions         Transaction[]
+  shgProposals         ShgProposal[]
+}
+
+model Holding {
+  id            Int      @id @default(autoincrement())
+  userId        Int
+  bondId        Int
+  quantity      Float
+  averagePrice  Float
+  totalInvested Float
+  currentValue  Float
+  purchaseDate  DateTime @default(now())
+  isActive      Boolean  @default(true)
+
+  // Relations
+  user          User @relation(fields: [userId], references: [id])
+  bond          Bond @relation(fields: [bondId], references: [id])
+}
+
+model Transaction {
+  id              Int      @id @default(autoincrement())
+  transactionHash String?
+  fromUserId      Int
+  toUserId        Int?
+  bondId          Int
+  transactionType String
+  quantity        Float
+  pricePerToken   Float
+  totalAmount     Float
+  gasFee          Float?
+  status          String   @default("pending")
+  blockNumber     Int?
+  createdAt       DateTime @default(now())
+  confirmedAt     DateTime?
+
+  // Relations
+  fromUser        User @relation(fields: [fromUserId], references: [id])
+  bond            Bond @relation(fields: [bondId], references: [id])
+}
+
+model ShgProposal {
+  id               Int      @id @default(autoincrement())
+  shgId            Int
+  proposerId       Int
+  proposalType     String
+  title            String
+  description      String?
+  bondId           Int?
+  investmentAmount Float?
+  votingDeadline   DateTime
+  status           String   @default("active")
+  votesFor         Int      @default(0)
+  votesAgainst     Int      @default(0)
+  executionTxHash  String?
+  createdAt        DateTime @default(now())
+
+  // Relations
+  shg              Shg        @relation(fields: [shgId], references: [id])
+  proposer         User       @relation(fields: [proposerId], references: [id])
+  bond             Bond?      @relation(fields: [bondId], references: [id])
+  votes            ShgVote[]
+}
+
+model ShgVote {
+  id           Int      @id @default(autoincrement())
+  proposalId   Int
+  voterId      Int
+  vote         String
+  votedAt      DateTime @default(now())
+
+  // Relations
+  proposal     ShgProposal @relation(fields: [proposalId], references: [id])
+  voter        User        @relation(fields: [voterId], references: [id])
+
+  @@unique([proposalId, voterId])
+}
+
+model EducationProgress {
+  id                    Int       @id @default(autoincrement())
+  userId                Int
+  courseId              String
+  lessonId              String
+  completionPercentage  Int       @default(0)
+  quizScore             Int?
+  completedAt           DateTime?
+  lastAccessed          DateTime  @default(now())
+
+  // Relations
+  user                  User @relation(fields: [userId], references: [id])
+}
+
+model KycDocument {
+  id                 Int       @id @default(autoincrement())
+  userId             Int
+  documentType       String
+  fileUrl            String
+  verificationStatus String    @default("pending")
+  verifiedBy         Int?
+  verifiedAt         DateTime?
+  uploadedAt         DateTime  @default(now())
+
+  // Relations
+  user               User @relation(fields: [userId], references: [id])
+}
